@@ -3,29 +3,102 @@
   	<head>
 
     	<meta charset="UTF-8">
-    	<title>Train Scheduler</title>
+      <!--reset css -->
+      <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+      <!-- external css -->
+      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+      <!--bootstrap -->
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <!--jquery -->
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <!-- moment.js -->
+      <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+      <!-- firebase -->
+      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <title>Train Scheduler</title>
       
   	</head>
   	
     <body>
 
   		<div class="container">
-			<div class="jumbotron">
+        <div class="jumbotron">
         	<h1 class="text-center">It's Train Time!</h1>
-      		</div>
-      		<div class="row">
-				<div class="col-lg-12">
-				<div class="panel panel-default">
+        </div>
+      	<div class="row">
+				  <div class="col-lg-12">
+				    <div class="panel panel-default">
             	<div class="panel-heading">
-              	<h3 class="panel-title">Current Train Schedule</h3>
-              	</div>
-            	</div>
-				    </div>
-      	</div>
-  		</div>
+              	<h3 class="panel-title"><b>Current Train Schedule</b></h3>
+              <table class="table">
+  <thead>
+    <tr>
+      <th><b>#</b></th>
+      <th><b>Train Name</b></th>
+      <th><b>Destination</b></th>
+      <th><b>Frequency (Min)</b></th>
+      <th><b>Next Arrival</b></th>
+      <th><b>Minutes Away</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Columbian</td>
+      <td>Amtrak</td>
+      <td>American</td>
+      <td>TransAtlantic</td>
+      <td>NorthWestern</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>New York</td>
+      <td>Philadelphia</td>
+      <td>Baltimore</td>
+      <td>Atlanta</td>
+      <td>Seattle</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>90</td>
+      <td>75</td>
+      <td>120</td>
+      <td>60</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>9:30 AM</td>
+      <td>9:30 AM</td>
+      <td>9:30 AM</td>
+      <td>9:30 AM</td>
+      <td>9:30 AM</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>90</td>
+      <td>75</td>
+      <td>120</td>
+      <td>60</td>
+      <td>45</td>
+    </tr>
+  </tbody>
+</table>
+              </div>
+            </div>
+				  </div>
+  		  </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title"><b>Add Train</b></h3>
 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   	</body>
 
   </html>
