@@ -22,14 +22,13 @@
       	<div class="row">
 				  <div class="col-lg-12">
 				    <div class="panel panel-default">
-            	<div class="panel-heading">
+            	<div class="trains">
                   <table class="table">
                     <thead>
                       <h3 class="panel-title"><b>Current Train Schedule</b></h3>
                     </thead>
                     <tbody>
                       <tr>
-                        <th><b>#</b></th>
                         <th><b>Train Name</b></th>
                         <th><b>Destination</b></th>
                         <th><b>Frequency (Min)</b></th>
@@ -37,7 +36,6 @@
                         <th><b>Minutes Away</b></th>
                       </tr>
                       <tr>
-                        <th scope="row">1</th>
                         <td>Columbian</td>
                         <td>New York</td>
                         <td>180</td>
@@ -45,7 +43,6 @@
                         <td>90</td>
                       </tr>
                       <tr>
-                        <th scope="row">2</th>
                         <td>American</td>
                         <td>Philadelphia</td>
                         <td>150</td>
@@ -53,7 +50,6 @@
                         <td>75</td>
                       </tr>
                       <tr>
-                        <th scope="row">3</th>
                         <td>Amtrak</td>
                         <td>Baltimore</td>
                         <td>240</td>
@@ -61,7 +57,6 @@
                         <td>120</td>
                       </tr>
                       <tr>
-                        <th scope="row">4</th>
                         <td>TransAtlantic</td>
                         <td>Atlanta</td>
                         <td>210</td>
@@ -69,7 +64,6 @@
                         <td>105</td>
                       </tr>
                       <tr>
-                        <th scope="row">5</th>
                         <td>Northwestern</td>
                         <td>Seattle</td>
                         <td>90</td>
@@ -89,23 +83,26 @@
                 <form>
                   <div class="train-name">
                     <label for="train-name">Add Train</label>
-                    <input type="text" class="form-control" id="addInputName" placeholder="Train Name">
+                    <form onsubmit="return sendtoDatabase()">
+                    <div class="form-group">
+                    <input type="text" class="form-control" id="train-name" placeholder="Train Name">
                   </div>
                   <div class="train-destination">
                     <label for="train-destination">Destination</label>
-                    <input type="text" class="form-control" id="addInputDestination" placeholder="Destination">
+                    <input type="text" class="form-control" id="train-destination" placeholder="Destination">
                   </div>
                   <div class="train-time">
                     <label for="train-time">First Train Time (hh:mm am/pm)</label>
-                    <input type="text" class="form-control" id="addInputTime" placeholder="HH:MM AM/PM">
+                    <input type="text" class="form-control" id="train-time" placeholder="HH:MM AM/PM">
                   </div>
                   <div class="train-frequency">
                     <label for="train-frequency">Ferquency</label>
-                    <input type="text" class="form-control" id="addInputFrequency" placeholder="In Minutes">
+                    <input type="text" class="form-control" id="train-frequency" placeholder="In Minutes">
                   </div>
                   <br>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button class="btn btn-primary" id="submit" name="submit" value="submit" type="submit">Submit</button>
                   </br>
+                  </div>
                 </form>
               </div>
             </div>
