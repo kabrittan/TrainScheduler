@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 	<html lang="en-us">
   	<head>
-
     	<meta charset="UTF-8">
       <!--reset css -->
       <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-      <!-- external css -->
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
       <!--bootstrap -->
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
       <!--jquery -->
@@ -14,13 +11,10 @@
       <!-- moment.js -->
       <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
       <!-- firebase -->
-      <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
       <title>Train Scheduler</title>
-      
   	</head>
-  	
     <body>
-
   		<div class="container">
         <div class="jumbotron" style="background-color: navy; color: white">
         	<h1 class="text-center">It's Train Time!</h1>
@@ -93,30 +87,31 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Add Train</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Train Name">
+                  <div class="train-name">
+                    <label for="train-name">Add Train</label>
+                    <input type="text" class="form-control" id="addInputName" placeholder="Train Name">
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Destination</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Destination">
+                  <div class="train-destination">
+                    <label for="train-destination">Destination</label>
+                    <input type="text" class="form-control" id="addInputDestination" placeholder="Destination">
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">First Train Time</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="HH:MM in Military Time">
+                  <div class="train-time">
+                    <label for="train-time">First Train Time (hh:mm am/pm)</label>
+                    <input type="text" class="form-control" id="addInputTime" placeholder="HH:MM AM/PM">
                   </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Ferquency</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="In Minutes">
+                  <div class="train-frequency">
+                    <label for="train-frequency">Ferquency</label>
+                    <input type="text" class="form-control" id="addInputFrequency" placeholder="In Minutes">
                   </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
+                  <br>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  </br>
                 </form>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
+      <script type="text/javascript" src="assets/javascript/script.js"></script>
   	</body>
-
   </html>
