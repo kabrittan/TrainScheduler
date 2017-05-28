@@ -9,7 +9,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// set local variable to firebase.database() \\
+// set local variable to firebase
 var database = firebase.database();
 
 var trainName = "";
@@ -49,32 +49,4 @@ function sendtoDatabase() {
     newRow.append('<button class="row' + e + '">Delete</button>');
     e++;
 
-    function liveTime() {
-      var momentTime = moment(times, "HH:mm").diff(moment(), "seconds");
-      var date = new Date(null);
-      date.setSeconds(momentTime); 
-      newTime = date.toISOString().substr(11, 8);
-      lastRow.html(newTime);
-    }
-    liveTime();
-    setInterval(liveTime, 1000);
-
-    for (var i = 0; i < e; i++) {
-      var buttonCycle = $('.row' + i + ' button');
-      var buttonClass = buttonCycle.attr("class");
-    }
-  
-
-    $(buttonCycle).click(function() {
-      $('tr.' + buttonClass).remove();
-    });
-  }, function(errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
-
-  // // Show's Time Live
-  // function showTime() {
-  //   $('.current-time').html(moment().format('MMMM Do YYYY, h:mm:ss a'));
-  // }
-  // showTime();
-  // setInterval(showTime, 1000);
+  }
