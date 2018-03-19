@@ -9,44 +9,92 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// set local variable to firebase
-var database = firebase.database();
+// Grab values from input form - add new trains //
 
 var trainName = "";
-var trainDestination = "";
-var trainTime = "";
-var trainFrequency = "";
+var frecuency = 0;
+var destination = "";
+var timeA = "";
+var nextTrain = "";
 
-function sendtoDatabase() {
-    trainName = $("#train-name").val().trim();
-    trainDestination = $("#train-destination").val().trim();
-    trainTime = $("#train-time").val().trim();
-    trainFrequency = $("#train-frequency").val().trim();
 
-    database.ref().push({
-      trainName:trainName,
-      trainDestination:trainDestination,
-      trainTime:trainTime,
-      trainFrequency:trainFrequency
-  });
-};
+$("#addTrain").on("click", function (event) {
 
-// Send to Firebase
-  database.ref().on("child_added", function(snapshot) {
-    console.log(snapshot.val());
-    var times = snapshot.val().trainTime;
-    var newRow = $('<tr>');
+  event.preventDefault();
 
-    newRow.addClass("row" + e);
-    $('.trains').append(newRow);
-    newRow.append("<th class='train-name'>" + snapshot.val().trainName + "</th>");
-    newRow.append("<th class='train-destination'>" + snapshot.val().trainDestination + "</th>");
-    newRow.append('<th class="train-time">' + times + "</th>");
-    newRow.append('<th class="train-frequency">' + times + "</th>");
-    
-    var lastRow = $('<th class="last">');
-    newRow.append(lastRow);
-    newRow.append('<button class="row' + e + '">Delete</button>');
-    e++;
+  trainName = $("#trainName").val().trim();
+  destination = $("#destination").val().trim();
+  frequency = $("#frecuency").val().trim();
+  timeA = $("#firstArr").val().trim();
 
-  }
+  console.log(trainName);
+  console.log(destination);
+  console.log(frequency);
+  console.log(timeA);
+
+
+  // First Time (pushed back 1 year to make sure it comes before current time)
+  var firtArrConv = moment(timeA, "HH:mm").subtract(1, "years");
+  console.log(firtArrConv);
+
+  // Current Time
+  var currentTime = moment();
+  console.log(moment(currentTime).format("hh:mm"));
+
+  // Difference between the times
+  var diffTime = moment().diff(moment(firtArrConv), "minutes");
+  console.log(diffTime);
+
+  // Time apart (remainder)
+  var tRemainder = diffTime % frequency;
+  console.log(tRemainder);
+
+  // Minute Until Train
+  var tMinutesTillTrain = frequency - tRemainder;
+  console.log(tMinutesTillTrain);
+
+  // Next Train
+  nextTrain = moment().add(tMinutesTillTrain, "minutes");
+  console.log(moment(nextTrain).format("hh:mm"));
+
+
+  var newTrain = {
+    train: trainName,
+    destination: destination,
+    frecuency: frecuency,
+    nextTrain: nextTrain.toLocaleString(),
+    minA: tMinutesTillTrain,
+    dateAdded: firebase.database.ServerValue.TIMESTAMP
+
+  };
+
+  console.log(newTrain);
+
+
+  database.ref().push(newTrain);
+
+  database.ref().orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot) {
+      // storing the snapshot.val() in a variable for convenience
+      var sv = snapshot.val();
+
+      // Console.loging the last user's data
+      console.log(sv.name);
+      console.log(sv.email);
+      console.log(sv.age);
+      console.log(sv.comment);
+
+      // Change the HTML to reflect
+      $("#name-display").text(sv.name);
+      $("#email-display").text(sv.email);
+      $("#age-display").text(sv.age);
+      $("#comment-display").text(sv.comment);
+
+      // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
+
+
+
+
+});
