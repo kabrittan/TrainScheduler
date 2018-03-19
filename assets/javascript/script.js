@@ -1,93 +1,88 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyDCX0WpZtkhUZ0X64fi6ZJXObZGtzCpAC8",
-    authDomain: "trainscheduler-53eda.firebaseapp.com",
-    databaseURL: "https://trainscheduler-53eda.firebaseio.com",
-    projectId: "trainscheduler-53eda",
-    storageBucket: "trainscheduler-53eda.appspot.com",
-    messagingSenderId: "751518924681"
+  apiKey: "AIzaSyDCX0WpZtkhUZ0X64fi6ZJXObZGtzCpAC8",
+  authDomain: "trainscheduler-53eda.firebaseapp.com",
+  databaseURL: "https://trainscheduler-53eda.firebaseio.com",
+  projectId: "trainscheduler-53eda",
+  storageBucket: "trainscheduler-53eda.appspot.com",
+  messagingSenderId: "751518924681"
 };
 firebase.initializeApp(config);
 
-// Grab values from input form - add new trains //
-
-var trainName = "";
-var frecuency = 0;
+// Values from input form
+var name = "";
 var destination = "";
-var timeA = "";
+var frequency = 0;
+var arrival = "";
 var nextTrain = "";
-
 
 $("#addTrain").on("click", function (event) {
 
   event.preventDefault();
 
-  trainName = $("#trainName").val().trim();
-  destination = $("#destination").val().trim();
-  frequency = $("#frecuency").val().trim();
-  timeA = $("#firstArr").val().trim();
+  name = $("#train-name").val().trim();
+  destination = $("#train-destination").val().trim();
+  frequency = $("#train-frequency").val().trim();
+  arrival = $("#train-time").val().trim();
 
-  console.log(trainName);
+  console.log(name);
   console.log(destination);
   console.log(frequency);
-  console.log(timeA);
+  console.log(arrival);
 
+  // First time (pushed back 1 year to make sure it comes before current time)
+  var firstArrival = moment(arrival, "HH:mm").subtract(1, "years");
+  console.log(firstArrival);
 
-  // First Time (pushed back 1 year to make sure it comes before current time)
-  var firtArrConv = moment(timeA, "HH:mm").subtract(1, "years");
-  console.log(firtArrConv);
-
-  // Current Time
+  // Current time
   var currentTime = moment();
   console.log(moment(currentTime).format("hh:mm"));
 
   // Difference between the times
-  var diffTime = moment().diff(moment(firtArrConv), "minutes");
+  var diffTime = moment().diff(moment(firstArrival), "minutes");
   console.log(diffTime);
 
-  // Time apart (remainder)
-  var tRemainder = diffTime % frequency;
-  console.log(tRemainder);
+  // Time remaining until next train 
+  var timeRemain = diffTime % frequency;
+  console.log(timeRemain);
 
-  // Minute Until Train
-  var tMinutesTillTrain = frequency - tRemainder;
-  console.log(tMinutesTillTrain);
+  // Minutes until train
+  var minutesUntil = frequency - timeRemain;
+  console.log(minutesUntil);
 
-  // Next Train
-  nextTrain = moment().add(tMinutesTillTrain, "minutes");
+  // Next train
+  nextTrain = moment().add(minutesUntil, "minutes");
   console.log(moment(nextTrain).format("hh:mm"));
 
 
   var newTrain = {
-    train: trainName,
+    train: name,
     destination: destination,
-    frecuency: frecuency,
+    frequency: frequency,
     nextTrain: nextTrain.toLocaleString(),
-    minA: tMinutesTillTrain,
+    minA: minutesUntil,
     dateAdded: firebase.database.ServerValue.TIMESTAMP
-
   };
 
   console.log(newTrain);
 
-
   database.ref().push(newTrain);
 
   database.ref().orderByChild("dateAdded").limitToLast(15).on("child_added", function(snapshot) {
-      // storing the snapshot.val() in a variable for convenience
-      var sv = snapshot.val();
+      // storing the snapshot value in a variable
+      var train = snapshot.val();
 
-      // Console.loging the last user's data
-      console.log(sv.name);
-      console.log(sv.email);
-      console.log(sv.age);
-      console.log(sv.comment);
+      // Console log the last data
+      console.log(train.name);
+      console.log(train.email);
+      console.log(train.age);
+      console.log(train.comment);
 
-      // Change the HTML to reflect
-      $("#name-display").text(sv.name);
-      $("#email-display").text(sv.email);
-      $("#age-display").text(sv.age);
-      $("#comment-display").text(sv.comment);
+      // Change the HTML
+      $("#train-name").text(train.name);
+      $("#train-destination").text(train.destination );
+      $("#train-frequency").text(train.frequency);
+      $("#train-time").text(train.comment);
 
       // Handle the errors
     }, function(errorObject) {
