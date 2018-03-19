@@ -31,7 +31,7 @@
                       <h3 class="panel-title"><b>Current Train Schedule</b></h3>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr style="background-color: navy; color: white">
                         <th><b>Train Name</b></th>
                         <th><b>Destination</b></th>
                         <th><b>Frequency (Min)</b></th>
@@ -85,21 +85,21 @@
               <div class="panel-heading">
                 <form>
                   <div class="train-name">
-                    <label for="train-name">Add Train</label>
+                    <label for="train-name"><strong>Add Train</strong></label>
                     <form onsubmit="return sendtoDatabase()">
                     <div class="form-group">
                     <input type="text" class="form-control" id="train-name" placeholder="Train Name">
                   </div>
                   <div class="train-destination">
-                    <label for="train-destination">Destination</label>
+                    <label for="train-destination"><strong>Destination</strong></label>
                     <input type="text" class="form-control" id="train-destination" placeholder="Destination">
                   </div>
                   <div class="train-time">
-                    <label for="train-time">First Train Time (hh:mm am/pm)</label>
+                    <label for="train-time"><strong>First Train Time (hh:mm am/pm)</strong></label>
                     <input type="text" class="form-control" id="train-time" placeholder="HH:MM AM/PM">
                   </div>
                   <div class="train-frequency">
-                    <label for="train-frequency">Ferquency</label>
+                    <label for="train-frequency"><strong>Frequency</strong></label>
                     <input type="text" class="form-control" id="train-frequency" placeholder="In Minutes">
                   </div>
                   <br>
